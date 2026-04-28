@@ -1,0 +1,70 @@
+
+{
+  "name": "appointment-desktop-widget",
+  "version": "1.0.0",
+  "description": "Floating appointment notification widget for desktop",
+  "main": "main.js",
+
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npx vite --host\" \"wait-on http://127.0.0.1:5173 && set NODE_ENV=development && electron .\"",
+
+     "build": "electron-builder",
+
+    "pack": "electron-builder --dir"
+  },
+
+  "build": {
+    "appId": "com.yourcompany.appointment-widget",
+    "productName": "Appointment Widget",
+
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico",
+      "signAndEditExecutable": false
+    },
+
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
+    },
+
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+
+    "linux": {
+      "target": "AppImage"
+    },
+
+    "files": [
+      "main.js",
+      "preload.js",
+      "dist/**/*",
+      "assets/**/*"
+    ],
+
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  },
+
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.0",
+    "react-router-dom": "^6.22.0"
+  },
+
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.0",
+    "concurrently": "^8.2.0",
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.3",
+    "vite": "^5.1.0",
+    "wait-on": "^7.2.0"
+  }
+}
